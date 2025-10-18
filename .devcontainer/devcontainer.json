@@ -1,0 +1,48 @@
+{
+    "name": "StationeersBackupManagerPlugin",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "TZ": "${localEnv:TZ:Europe/Stockholm}"
+        }
+    },
+    "workspaceFolder": "/workspaces/project",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/project,type=bind,consistency=cached",
+    "mounts": [
+    "source=ssui-socket-volume,target=/tmp/ssui,type=volume"
+    ],
+    "features": {
+        "ghcr.io/devcontainers/features/go:1": {
+            "version": "1.25.0"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "golang.go",
+                "supermaven.supermaven",
+                "eamodio.gitlens",
+                "pkief.material-icon-theme"
+            ],
+            "settings": {
+                "go.toolsManagement.autoUpdate": true,
+                "workbench.iconTheme": "material-icon-theme",
+                "workbench.colorTheme": "Solarized Dark",
+                "material-icon-theme.files.customClones": [
+                    {
+                        "name": "ssui",
+                        "base": "rocket",
+                        "color": "blue-500",
+                        "fileExtensions": [
+                            "ssui"
+                        ]
+                    }
+                ],
+                "files.associations": {
+                    "*.ssui": "json"
+                }
+            }
+        }
+    },
+    "postCreateCommand": "go mod tidy"
+}
