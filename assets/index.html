@@ -1,50 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSUI PluginLib</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: #e0e0e0;
-        }
-        h1 {
-            color: #00d4ff;
-            font-size: 2em;
-            margin: 0 0 10px;
-        }
-        h2 {
-            color: #00d4ff;
-            font-size: 1.5em;
-            margin: 0 0 10px;
-        }
-        p {
-            color: #b0b0cc;
-            font-size: 1em;
-            margin: 0 0 15px;
-        }
-        img {
-            max-width: 100%;
-            border-radius: 8px;
-            border: 2px solid #00d4ff;
-        }
-    </style>
+    <title>Stationeers Backup Manager</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/components.css">
+    <link rel="stylesheet" href="/static/css/mobile.css">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
 </head>
+
 <body>
-    <div class="container">
-        <h1>Example Page</h1>
-        <h2>SSUI PluginLib</h2>
-        <p>This is a simple example page to demonstrate the usage of the PluginLib.</p>
-        <p>The html is served from the assets bundled into the plugin executable.</p>
-        <img src="https://github.com/JacksonTheMaster/jmg-assets/blob/main/exampleimage_600x400.png?raw=true" alt="Cute cat">
-        <p><i>one of JacksonTheMaster's cats</i></p>
+    <main>
+        <p id="status" hidden></p>
+        <div id="backups">
+    <h2>Stationeers Backup Manager</h2>
+    <div class="backup-controls">
+        <select id="backupLimit" onchange="fetchBackups()">
+            <option value="5">Last 5</option>
+            <option value="10">Last 10</option>
+            <option value="20">Last 20</option>
+            <option value="50">Last 50</option>
+            <option value="">All backups</option>
+        </select>
+        <button id="backupRefreshButton" onclick="fetchBackups()">↻</button>
     </div>
+    <ul id="backupList"></ul>
+</div>
+    <footer>
+        <div class="copyright">
+            Copyright © 2025 <a href="https://github.com/jacksonthemaster">JacksonTheMaster.</a>
+        </div>
+    </footer>
+
+
+    <script src="/plugins/StationeersBackupManagerPlugin/js/backups.js"></script>
+
 </body>
+
 </html>

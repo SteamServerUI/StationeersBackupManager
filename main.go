@@ -7,6 +7,7 @@ import (
 	"sync"
 
 	"github.com/SteamServerUI/PluginLib"
+	"github.com/SteamServerUI/StationeersBackupManagerPlugin/api"
 	"github.com/SteamServerUI/StationeersBackupManagerPlugin/backupmgr"
 	"github.com/SteamServerUI/StationeersBackupManagerPlugin/global"
 )
@@ -86,7 +87,8 @@ func GetAllSettings() {
 func ExposeAPI(wg *sync.WaitGroup) {
 
 	backupHandler := backupmgr.NewHTTPHandler(backupmgr.GlobalBackupManager)
-	PluginLib.RegisterRoute("/", backupHandler.ListBackupsHandler)
+	PluginLib.RegisterRoute("/", api.HandleBackupManagerIndex)
+	PluginLib.RegisterRoute("/js/backups.js", api.HandleBackupsJS)
 
 	PluginLib.RegisterRoute("/api/v1/backups", backupHandler.ListBackupsHandler)
 	PluginLib.RegisterRoute("/api/v1/backups/restore", backupHandler.RestoreBackupHandler)
