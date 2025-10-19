@@ -3,7 +3,7 @@ module github.com/SteamServerUI/StationeersBackupManagerPlugin
 go 1.25.0
 
 require (
-	github.com/SteamServerUI/PluginLib v1.0.0
+	github.com/SteamServerUI/PluginLib v1.0.2
 	github.com/fsnotify/fsnotify v1.7.0
 	github.com/google/uuid v1.6.0
 )

@@ -2,6 +2,7 @@ package backupmgr
 
 import (
 	"fmt"
+	"os"
 	"sync"
 	"time"
 
@@ -59,12 +60,17 @@ func RegisterHTTPHandler(handler *HTTPHandler) {
 // GetBackupConfig returns a properly configured BackupConfig
 func GetBackupConfig() BackupConfig {
 
+	saveName, err := getSaveNameFromSSUIRunfile()
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
 	id := uuid.New()
 	bmIdentifier := "[BM" + id.String()[:6] + "]:"
 	return BackupConfig{
 		WorldName:     "SaveName",
-		BackupDir:     "./saves/SaveName/autosave",
-		SafeBackupDir: "./saves/SaveName/Safebackups",
+		BackupDir:     "./saves/" + saveName + "/autosave",
+		SafeBackupDir: "./saves/" + saveName + "/Safebackups",
 		WaitTime:      20 * time.Second,
 		Identifier:    bmIdentifier,
 	}
@@ -77,4 +83,12 @@ func ReloadBackupManagerFromConfig() error {
 
 	// Reinitialize the global backup manager with the new config
 	return InitGlobalBackupManager(backupConfig)
+}
+
+func getSaveNameFromSSUIRunfile() (string, error) {
+	savename, err := PluginLib.GetSingleArgFromRunfile("SaveName")
+	if err != nil {
+		return "", fmt.Errorf("failed to get save name from runfile: %w", err)
+	}
+	return savename, nil
 }
