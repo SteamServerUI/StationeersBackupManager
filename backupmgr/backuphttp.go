@@ -87,5 +87,5 @@ func (h *HTTPHandler) RestoreBackupHandler(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	w.Write([]byte("Server stopped & Backup restored successfully, Start the server to load the restored backup"))
+	w.Write([]byte("Backup restored successfully, restart the server to load the restored backup"))
 }
