@@ -65,14 +65,8 @@ func GetBackupConfig() BackupConfig {
 		WorldName:     "SaveName",
 		BackupDir:     "./saves/SaveName/autosave",
 		SafeBackupDir: "./saves/SaveName/Safebackups",
-		WaitTime:      30 * time.Second, // not sure why we are not using config.BackupWaitTime here, but ill not touch it in this commit (config rework)
-		RetentionPolicy: RetentionPolicy{
-			KeepLastN:       0,
-			KeepWeeklyFor:   0,
-			KeepMonthlyFor:  0,
-			CleanupInterval: 0,
-		},
-		Identifier: bmIdentifier,
+		WaitTime:      20 * time.Second,
+		Identifier:    bmIdentifier,
 	}
 }
 

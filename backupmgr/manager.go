@@ -168,27 +168,6 @@ func (m *BackupManager) handleNewBackup(filePath string) {
 	}()
 }
 
-// startCleanupRoutine runs periodic backup cleanup
-func (m *BackupManager) startCleanupRoutine() {
-	m.wg.Add(1)
-	defer m.wg.Done()
-
-	ticker := time.NewTicker(m.config.RetentionPolicy.CleanupInterval)
-	defer ticker.Stop()
-
-	for {
-		select {
-		case <-m.ctx.Done():
-			PluginLib.Log("Cleanup routine stopped due to context cancellation", "Info")
-			return
-		case <-ticker.C:
-			if err := m.Cleanup(); err != nil {
-				PluginLib.Log(fmt.Sprintf("Backup cleanup error: %s", err.Error()), "Error")
-			}
-		}
-	}
-}
-
 // ListBackups returns information about available backups
 // limit: number of recent backups to return (0 for all)
 func (m *BackupManager) ListBackups(limit int) ([]BackupGroup, error) {
