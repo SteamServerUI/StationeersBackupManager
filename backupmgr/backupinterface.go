@@ -48,7 +48,7 @@ func InitGlobalBackupManager(config BackupConfig) error {
 		}
 	}(manager)
 
-	PluginLib.Log(fmt.Sprintf("%s Backup manager reloaded successfully", config.Identifier), "Info")
+	PluginLib.Log(fmt.Sprintf("%s Backup manager reloaded successfully", config.Identifier), "Debug")
 	return nil
 }
 

@@ -83,7 +83,7 @@ func (m *BackupManager) Initialize(identifier string) <-chan error {
 // Start begins the backup monitoring and cleanup routines
 func (m *BackupManager) Start(identifier string) error {
 	// Wait for initialization to complete
-	PluginLib.Log(fmt.Sprintf("%s is waiting for save folder initialization...", identifier), "Info")
+	PluginLib.Log(fmt.Sprintf("%s is waiting for save folder initialization...", identifier), "Debug")
 	initResult := <-m.Initialize(identifier)
 	if initResult != nil {
 		return fmt.Errorf("%s failed to initialize backup manager : %w", identifier, initResult)
