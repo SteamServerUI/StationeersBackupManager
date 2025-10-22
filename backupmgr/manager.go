@@ -48,7 +48,7 @@ func (m *BackupManager) Initialize(identifier string) <-chan error {
 				return
 			}
 
-			err := PluginLib.Log(fmt.Sprintf("%s waiting for save folder %s to be created by Stationeers...", identifier, m.config.BackupDir), "Info")
+			err := PluginLib.Log(fmt.Sprintf("%s waiting for save folder %s to be created by Stationeers...", identifier, m.config.BackupDir), "Debug")
 			if err != nil {
 				fmt.Println(identifier)
 				fmt.Println(err.Error())
