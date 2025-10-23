@@ -4,7 +4,7 @@ import "github.com/SteamServerUI/PluginLib"
 
 var (
 	AssetManager      *PluginLib.AssetManager
-	PluginName        = "StationeersBackupManagerPlugin"
+	PluginName        = "StationeersBackupManager"
 	DefaultLogLevel   = "Info"
 	PluginAuthor      = "JacksonTheMaster / SteamServerUI Dev Team"
 	Identifier        string
