@@ -65,12 +65,19 @@ func GetBackupConfig() BackupConfig {
 		fmt.Println(err.Error())
 		os.Exit(1)
 	}
+
+	runfileIdentifier, err := getRfIdentifierFromSSUIRunfile()
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
+
 	id := uuid.New()
 	bmIdentifier := "[BM" + id.String()[:6] + "]:"
 	return BackupConfig{
 		WorldName:     "SaveName",
-		BackupDir:     "./saves/" + saveName + "/autosave",
-		SafeBackupDir: "./saves/" + saveName + "/Safebackups",
+		BackupDir:     "./" + runfileIdentifier + "/saves/" + saveName + "/autosave",
+		SafeBackupDir: "./" + runfileIdentifier + "/saves/" + saveName + "/Safebackups",
 		WaitTime:      20 * time.Second,
 		Identifier:    bmIdentifier,
 	}
@@ -91,4 +98,17 @@ func getSaveNameFromSSUIRunfile() (string, error) {
 		return "", fmt.Errorf("failed to get save name from runfile: %w", err)
 	}
 	return savename, nil
+}
+
+func getRfIdentifierFromSSUIRunfile() (string, error) {
+	runfileIdentifier, err := PluginLib.GetSetting("RunfileIdentifier")
+	if err != nil {
+		return "", fmt.Errorf("failed to get RunfileIdentifier from SSUI: %w", err)
+	}
+
+	runfileIdentifierStr, ok := runfileIdentifier.(string)
+	if !ok {
+		return "", fmt.Errorf("RunfileIdentifier is not a string")
+	}
+	return runfileIdentifierStr, nil
 }

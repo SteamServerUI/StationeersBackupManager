@@ -86,6 +86,20 @@ func GetAllSettings() {
 
 func ExposeAPI(wg *sync.WaitGroup) {
 
+	rfi, err := getRfIdentifierFromSSUIRunfile()
+	if err != nil {
+		log.Fatal(err)
+	}
+	if rfi == "" {
+		log.Fatal("RunfileIdentifier is empty")
+	}
+
+	if rfi != "Stationeers" && rfi != "StationeersNewTerrain" {
+		log.Fatal("RunfileIdentifier is not Stationeers or StationeersNewTerrain")
+	}
+
+	global.RunfileIdentifier = rfi
+
 	backupHandler := backupmgr.NewHTTPHandler(backupmgr.GlobalBackupManager)
 	PluginLib.RegisterRoute("/", api.HandleBackupManagerIndex)
 	PluginLib.RegisterRoute("/js/backups.js", api.HandleBackupsJS)
@@ -95,4 +109,17 @@ func ExposeAPI(wg *sync.WaitGroup) {
 	PluginLib.ExposeAPI(wg)
 	PluginLib.RegisterPluginAPI()
 
+}
+
+func getRfIdentifierFromSSUIRunfile() (string, error) {
+	runfileIdentifier, err := PluginLib.GetSetting("RunfileIdentifier")
+	if err != nil {
+		return "", fmt.Errorf("failed to get RunfileIdentifier from SSUI: %w", err)
+	}
+
+	runfileIdentifierStr, ok := runfileIdentifier.(string)
+	if !ok {
+		return "", fmt.Errorf("RunfileIdentifier is not a string")
+	}
+	return runfileIdentifierStr, nil
 }
