@@ -19,6 +19,12 @@ func (m *BackupManager) getBackupGroups() ([]BackupGroup, error) {
 		}
 		return nil
 	})
+	// list all files in the safe backup dir to console for debugging
+	for _, file := range files {
+		fmt.Println(file.Name())
+	}
+	// print the dir to console for debugging
+	fmt.Println(m.config.SafeBackupDir)
 	if err != nil {
 		// if the error contains no such file or directory, return nil but return a custom string intsted 	of the error
 		if strings.Contains(err.Error(), "no such file or directory") || strings.Contains(err.Error(), "The system cannot find the file specified") {

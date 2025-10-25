@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/SteamServerUI/StationeersBackupManagerPlugin/global"
+	"github.com/SteamServerUI/StationeersBackupManager/global"
 )
 
 func HandleBackupManagerIndex(w http.ResponseWriter, r *http.Request) {

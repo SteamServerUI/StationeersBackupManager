@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function fetchBackups() {
     const limit = document.getElementById('backupLimit').value;
-    const url = limit ? `/plugins/StationeersBackupManagerPlugin/api/v1/backups?limit=${limit}` : '/plugins/StationeersBackupManagerPlugin/api/v1/backups';
+    const url = limit ? `/plugins/StationeersBackupManager/api/v1/backups?limit=${limit}` : '/plugins/StationeersBackupManager/api/v1/backups';
     
     return fetch(url)
         .then(response => {
@@ -83,7 +83,7 @@ function extractIndex(backupText) {
 
 function restoreBackup(index) {
     const status = document.getElementById('status');
-    fetch(`/plugins/StationeersBackupManagerPlugin/api/v1/backups/restore?index=${index}`)
+    fetch(`/plugins/StationeersBackupManager/api/v1/backups/restore?index=${index}`)
         .then(response => response.text())
         .then(data => {
             status.hidden = false;

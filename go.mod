@@ -1,4 +1,4 @@
-module github.com/SteamServerUI/StationeersBackupManagerPlugin
+module github.com/SteamServerUI/StationeersBackupManager
 
 go 1.25.0
 

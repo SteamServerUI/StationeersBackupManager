@@ -7,9 +7,9 @@ import (
 	"sync"
 
 	"github.com/SteamServerUI/PluginLib"
-	"github.com/SteamServerUI/StationeersBackupManagerPlugin/api"
-	"github.com/SteamServerUI/StationeersBackupManagerPlugin/backupmgr"
-	"github.com/SteamServerUI/StationeersBackupManagerPlugin/global"
+	"github.com/SteamServerUI/StationeersBackupManager/api"
+	"github.com/SteamServerUI/StationeersBackupManager/backupmgr"
+	"github.com/SteamServerUI/StationeersBackupManager/global"
 )
 
 //go:embed assets/*
