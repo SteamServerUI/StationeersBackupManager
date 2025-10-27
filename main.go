@@ -108,7 +108,7 @@ func ExposeAPI(wg *sync.WaitGroup) {
 	PluginLib.RegisterRoute("/api/v1/backups/restore", backupHandler.RestoreBackupHandler)
 	PluginLib.ExposeAPI(wg)
 	PluginLib.RegisterPluginAPI()
-
+	wg.Add(1)
 }
 
 func getRfIdentifierFromSSUIRunfile() (string, error) {
