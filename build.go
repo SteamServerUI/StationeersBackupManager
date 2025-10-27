@@ -30,7 +30,7 @@ func main() {
 		os   string
 		arch string
 	}{
-		//{"windows", "amd64"},
+		{"windows", "amd64"},
 		{"linux", "amd64"},
 	}
 
