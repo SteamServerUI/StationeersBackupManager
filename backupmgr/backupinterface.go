@@ -32,7 +32,7 @@ func InitGlobalBackupManager(config BackupConfig) error {
 		GlobalBackupManager = nil // Clear the manager to avoid stale references
 	}
 
-	PluginLib.Log(fmt.Sprintf("%s Creating a global backup manager with ID %s", config.Identifier, config.Identifier), "Info")
+	PluginLib.Log(fmt.Sprintf("%s Creating a global backup manager with ID %s", config.Identifier, config.Identifier), "Debug")
 	manager := NewBackupManager(config)
 	GlobalBackupManager = manager
 
@@ -63,13 +63,13 @@ func GetBackupConfig() BackupConfig {
 	saveName, err := getSaveNameFromSSUIRunfile()
 	if err != nil {
 		fmt.Println(err.Error())
-		os.Exit(1)
+		os.Exit(2)
 	}
 
 	runfileIdentifier, err := getRfIdentifierFromSSUIRunfile()
 	if err != nil {
 		fmt.Println(err.Error())
-		os.Exit(1)
+		os.Exit(3)
 	}
 
 	id := uuid.New()

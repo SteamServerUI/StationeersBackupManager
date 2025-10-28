@@ -21,13 +21,13 @@ type fsWatcher struct {
 func newFsWatcher(path string, identifier string) (*fsWatcher, error) {
 	// Normalize path
 	normalizedPath := filepath.Clean(path)
-	PluginLib.Log(fmt.Sprintf("%s Creating watcher for path: %s", identifier, normalizedPath), "Info")
+	PluginLib.Log(fmt.Sprintf("%s Creating watcher for path: %s", identifier, normalizedPath), "Debug")
 
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
 		return nil, fmt.Errorf("%s failed to create watcher: %w", identifier, err)
 	}
-	PluginLib.Log(fmt.Sprintf("%s Watcher created successfully", identifier), "Info")
+	PluginLib.Log(fmt.Sprintf("%s Watcher created successfully", identifier), "Debug")
 
 	// Watch the root save path and all subdirectories
 	err = filepath.WalkDir(normalizedPath, func(subPath string, d os.DirEntry, err error) error {
@@ -38,7 +38,7 @@ func newFsWatcher(path string, identifier string) (*fsWatcher, error) {
 			if err := watcher.Add(subPath); err != nil {
 				PluginLib.Log(fmt.Sprintf("%s Failed to add subdir %s to watcher: %s", identifier, subPath, err.Error()), "Error")
 			} else {
-				PluginLib.Log(fmt.Sprintf("%s Added subdir %s to watcher", identifier, subPath), "Info")
+				PluginLib.Log(fmt.Sprintf("%s Added subdir %s to watcher", identifier, subPath), "Debug")
 			}
 		}
 		return nil

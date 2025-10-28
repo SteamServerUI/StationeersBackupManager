@@ -37,7 +37,7 @@ func (m *BackupManager) Initialize(identifier string) <-chan error {
 			if stat, err := os.Stat(m.config.BackupDir); err == nil {
 				if stat.IsDir() {
 					// Directory exists, proceed
-					PluginLib.Log(fmt.Sprintf("%s found backup directory: %s", identifier, m.config.BackupDir), "Info")
+					PluginLib.Log(fmt.Sprintf("%s found backup directory: %s", identifier, m.config.BackupDir), "Debug")
 					break
 				}
 				result <- fmt.Errorf("%s backup path %s is not a directory", identifier, m.config.BackupDir)
@@ -72,7 +72,7 @@ func (m *BackupManager) Initialize(identifier string) <-chan error {
 			result <- fmt.Errorf("%s error creating safe backup directory %s: %v", identifier, m.config.SafeBackupDir, err)
 			return
 		}
-		PluginLib.Log(fmt.Sprintf("%s created safebackups at %s", identifier, m.config.SafeBackupDir), "Info")
+		PluginLib.Log(fmt.Sprintf("%s created safebackups at %s", identifier, m.config.SafeBackupDir), "Debug")
 
 		result <- nil
 	}()
@@ -106,7 +106,7 @@ func (m *BackupManager) watchBackups(identifier string) {
 	m.wg.Add(1)
 	defer m.wg.Done()
 
-	PluginLib.Log(fmt.Sprintf("%s Starting backup file watcher...", identifier), "Info")
+	PluginLib.Log(fmt.Sprintf("%s Starting backup file watcher...", identifier), "Debug")
 	defer PluginLib.Log(fmt.Sprintf("%s Backup file watcher stopped", identifier), "Info")
 
 	for {
